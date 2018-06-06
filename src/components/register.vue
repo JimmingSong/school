@@ -1,30 +1,45 @@
 <template>
-	<div id="r-con">
+	<div class="con">
 		<headers></headers>
-		<div id="register-content">
+		<div class="register-content">
 			<el-form class="r-form" :model="form" ref="form" label-width="80px">
 				<p class="r-title">用户注册</p>
 			    <el-form-item>
-			    	<span>昵称</span>
-			        <el-input v-model="form.name"></el-input>
+			    	<span class="r-des">昵称</span>
+			        <el-input v-model="form.name" placeholder="请输入昵称"></el-input>
 			    </el-form-item>
 			    <el-form-item>
-			    	<span>性别</span>
-			    	<el-switch v-model="form.gender" active-text="男" inactive-text="女">
-			    	</el-switch>
+			    	<span class="r-des">性别</span>
+			    		<el-radio v-model="form.gender" label="1" class='c-fff'>女</el-radio>
+			    		<el-radio v-model="form.gender" label="2" class='c-fff'>男</el-radio>
 			    </el-form-item>
 			    <el-form-item>
-			    	<span>联系电话</span>
-			    	<el-input v-model='form.tel'></el-input>
+			    	<span class="r-des">手机号</span>
+			    	<el-input type="tel" v-model='form.tel' placeholder="请输入手机号"></el-input>
 			    </el-form-item>
 			    <el-form-item>
-			    	<span>年龄</span>
-			        <el-input v-model="form.age" placeholder=""></el-input>
+			        <span class="r-des">邮箱</span>
+			        <el-input type="email" v-model="form.email" placeholder="请输入邮箱"></el-input>
 			    </el-form-item>
-			    <el-form-item class="r-btn">
+			    <el-form-item>
+			        <span class="r-des">密码</span>
+			        <el-input v-model="form.pwd" placeholder="请输入密码"></el-input>
+			    </el-form-item>
+			    <el-form-item>
+			        <span class="r-des">密码确认</span>
+			        <el-input v-model="form.pwd1" placeholder="请输入密码"></el-input>
+			    </el-form-item>
+			    <el-form-item>
+			        <span class="r-des">验证码</span>
+			        
+			    </el-form-item>
+			    <el-form-item class='r-btn'>
 			        <el-button type="primary" @click="onSubmit">立即注册</el-button>
-			        	<router-link to='/'>
-			        		<el-button>取消注册</el-button>
+			        	<router-link to='/login'>
+			        		<el-button>返回登录</el-button>
+			        	</router-link>
+			        	<router-link class="forget-pwd" to="/forget">
+				        	忘记密码
 			        	</router-link>
 			    </el-form-item>
 			</el-form>
@@ -32,7 +47,7 @@
 	</div>
 </template>
 <script>
-	import headers from './header.vue'
+	import headers from './header'
 	export default {
 		data(){
 			return {
@@ -40,46 +55,24 @@
 					name:"",
 					gender:true,
 					tel:"",
-					age:""
+					email:"",
+					pwd:"",
+					pwd1:""
 				}
 			}
 		},
 		methods:{
 			onSubmit(){
-				console.log(this.form)
+				console.log('注册')
 			}
 		},
 		components:{headers}
 	}
 </script>
 <style>
-	#r-con{
-			background: url('../../static/img/73.jpg') no-repeat;
-			background-size: 100% 100%;
-			height: 100vh;
-			position: relative;
-	}
-	#register-content{
-		width: 1200px;
-		margin: 10px auto 0;
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%,-65%);
-	}
 	.r-title{
 		text-align: center;
 		font-size: 1.5rem
-	}
-	.r-form{
-		width: 60%;
-		margin: 0 auto;
-		background: rgba(0,0,0,0.6);
-		color: #fff;
-		padding: 8px;
-	}
-	.r-btn{
-		text-align:center;
 	}
 	.el-input{
 		width: 50%

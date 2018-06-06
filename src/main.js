@@ -8,6 +8,7 @@ import Vuex from 'vuex'
 import element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.css'
+import '../static/css/base.css'
 
 Vue.use(element);
 Vue.use(Vuex);
