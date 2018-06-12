@@ -9,7 +9,8 @@ let action = {
 	},
 	search(context){
 		let data = util.ajaxGet();
-		context.commit('search',data)
+		console.log(data);
+		context.commit('search',data);
 	}
 }
 export default action

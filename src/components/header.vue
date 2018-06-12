@@ -27,10 +27,10 @@
 			// number:function(){
 	  // 			return this.$store.state.number
 	  // 		}
-	  		...Vuex.mapState(['number','product'])
+	  		// ...Vuex.mapState(['number','product'])
 		},
 		methods:{
-			...Vuex.mapActions(['increment'])
+			// ...Vuex.mapActions(['increment'])
 		}
 	}
 </script>
