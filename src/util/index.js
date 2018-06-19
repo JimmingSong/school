@@ -1,5 +1,4 @@
-const util = {
-  ajaxGet() {
+  export function ajaxGet() {
     let host = location.hostname;
   let xhr = null;
   if (window.XMLHttpRequest) { // code for all new browsers
@@ -25,6 +24,5 @@ const util = {
     xhr.open('GET','http://localhost:8088/search',false);
     xhr.send(null);
   }
-}
 
-export default util;
+ // default util;

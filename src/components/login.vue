@@ -1,6 +1,6 @@
 <template>
 	<div class="con">
-		<headers></headers>
+		<headers :person='person'></headers>
 		<div class='register-content'>
 			<el-form class="r-form" :model="form" ref="form" label-width="80px">
 				<p class="r-title">登录</p>
@@ -25,22 +25,61 @@
 <script>
 	import headers from './header'
 	import Vuex from 'vuex'
-	import util from '../util/fun.js'
+	// import util from '../util'
 	export default {
 		data(){
 			return {
 				form:{
 					name:"",
 					pwd:""
-				}
+				},
+				person:'您好!请登录'
 			}
 		},
 		methods:{
-			onSubmit:function(){
-				let a = util.ajaxGet()
-				console.log(a);
-				// this.search();
-			}
+			onSubmit(){
+				let obj = {
+					"name": this.form.name,
+					"pwd":this.form.pwd
+				}
+				let person = this.person;
+				new Promise((resolve,reject)=>{
+					$.ajax({
+						url: 'http://localhost:8088/login',
+						type: 'post',
+						// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+						data: obj,
+						success:function(data){
+							if(data.status){
+								resolve(data)
+							}else{
+								reject()
+							}
+						},
+						error:function(){
+							reject(false)
+						}
+					}).then((data)=>{
+						this.person = "欢迎"+data.per;
+						document.cookie='per='+data.per;
+						this.$router.push('/');
+					}).catch(()=>{
+						aler("用户不存在")
+					})
+				})
+				
+				// .done(function(data) {
+				// 	console.log(this.person);
+				// 	person = data.per;
+				// 	console.log(data);
+				// })
+				// .fail(function() {
+				// 	console.log("error");
+				// })
+				// .always(function() {
+				// 	console.log("complete");
+				// });
+			},
 		},
 		// methods:{
 		// 	...Vuex.mapActions(['search'])

@@ -3,10 +3,13 @@
 		<header id="header">
 			<div class="logo">
 				<img src="../assets/logo.png">
-				<span>欢迎来到校内转</span>
+				<router-link to='/'>
+					<span>欢迎来到校内转</span>
+				</router-link>
 			</div>
 			<div class="login">
-				<router-link to='/login'>您好!请登录</router-link>
+				<router-link to='/login'>{{per}}</router-link>
+				<span class="logout" @click='logout()'>注销</span>
 				<router-link to='/register'>免费注册</router-link>
 				<!-- <span>免费注册</span> -->
 			</div>
@@ -23,15 +26,38 @@
 	import Vuex from 'vuex'
 	Vue.use(Vuex)
 	export default {
+		// data(){
+		// 	return {
+		// 		per:'请登录'
+		// 	}
+		// },
 		computed:{
-			// number:function(){
-	  // 			return this.$store.state.number
-	  // 		}
-	  		// ...Vuex.mapState(['number','product'])
+			per(){
+				console.log(document.cookie)
+				let per = document.cookie.split('=')[0];
+				let val = document.cookie.split("=")[1];
+				if(val && this.person){
+					return "欢迎,"+val;
+				}else{
+					return this.person
+				}
+			}
 		},
 		methods:{
-			// ...Vuex.mapActions(['increment'])
-		}
+			logout(){
+				document.cookie=document.cookie.split('=')[0]+'=';
+				this.person = '您好!请登录'
+			}
+		},
+		props:{
+			person:{
+				type:String,
+				default:'您好!请登录'
+			}
+		},
+		// watch:{
+		// 	"per"
+		// }
 	}
 </script>
 <style>
@@ -40,6 +66,9 @@
 		height: 35px;
 		background: #e3e4e5;
 		padding:3px  0;
+	}
+	.logout{
+		margin-left: .5rem
 	}
 	#header {
 		width: 1200px;

@@ -6,6 +6,8 @@ import router from './router'
 import store from './store'
 import Vuex from 'vuex'
 import element from 'element-ui'
+import axios from 'axios'
+import $ from 'jquery'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.css'
 import '../static/css/base.css'
@@ -13,6 +15,7 @@ import '../static/css/base.css'
 
 Vue.use(element);
 Vue.use(Vuex);
+Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false
 
@@ -25,14 +28,11 @@ new Vue({
   template: '<App/>',
   computed:{
   	// ...mapState([msg])
-  	...Vuex.mapState(['product'])
 
   },
   methods:{
-  		...Vuex.mapActions(['search'])
   },
   created:function(){
-  		this.search();
   		// console.log(this.product)
   },
   mounted:function(){
